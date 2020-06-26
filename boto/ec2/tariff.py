@@ -43,6 +43,7 @@ class TariffInstance(object):
         self.ccus = None
         self.memory = None
         self.services = None
+        self.deprecated = False
 
     def startElement(self, name, attrs, connection):
         if name == 'services':
@@ -60,6 +61,8 @@ class TariffInstance(object):
             self.ccus = Decimal(value)
         elif name == 'memory':
             self.memory = int(value)
+        elif name == "deprecated":
+            self.deprecated = bool(value)
         else:
             setattr(self, name, value)
 
@@ -70,6 +73,7 @@ class TariffService(object):
         self.description = None
         self.measure = None
         self.rates = None
+        self.deprecated = False
 
     def startElement(self, name, attrs, connection):
         if name == 'rates':
@@ -85,6 +89,8 @@ class TariffService(object):
             self.description = value
         elif name == 'measure':
             self.measure = value
+        elif name == "deprecated":
+            self.deprecated = bool(value)
         else:
             setattr(self, name, value)
 
@@ -111,6 +117,7 @@ class TariffVolume(TariffService):
         super(TariffVolume, self).__init__(connection)
         self.type = None
         self.iops = None
+        self.deprecated = False
 
     def startElement(self, name, attrs, connection):
         return super(TariffVolume, self).startElement(name, attrs, connection)
@@ -120,6 +127,8 @@ class TariffVolume(TariffService):
             self.type = value
         elif name == 'iops':
             self.iops = int(value)
+        elif name == "deprecated":
+            self.deprecated = bool(value)
         else:
             super(TariffVolume, self).endElement(name, value, connection)
 
