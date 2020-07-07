@@ -768,7 +768,7 @@ class EC2Connection(AWSQueryConnection):
                       dry_run=False,
                       high_available=None,
                       root_device_name=None, public_addressing=None,
-                      virtualization_type=None, description=None,
+                      virtualization_type=None,
                       private_dns_name=None, switch_ids=None,
                       instance_tags=None, volume_tags=None):
         """
@@ -935,9 +935,6 @@ class EC2Connection(AWSQueryConnection):
         :type virtualization_type: string
         :param virtualization_type: Instance virtualization type (kvm-virtio|kvm-legacy).
 
-        :type description: string
-        :param description: Instance description.
-
         :type switch_ids: list
         :param switch_ids: list of virtual switch IDs
 
@@ -1025,8 +1022,6 @@ class EC2Connection(AWSQueryConnection):
             params['AddressingType'] = 'public' if public_addressing else 'private'
         if virtualization_type:
             params['VirtualizationType'] = virtualization_type
-        if description:
-            params['Description'] = description
         if private_dns_name:
             params['PrivateDnsName'] = private_dns_name
         if switch_ids:
