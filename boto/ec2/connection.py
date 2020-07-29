@@ -1181,7 +1181,6 @@ class EC2Connection(AWSQueryConnection):
             * groupSet
             * ebsOptimized
             * sriovNetSupport
-            * description
 
         :type dry_run: bool
         :param dry_run: Set to True if the operation should not actually run.
