@@ -454,6 +454,7 @@ class VPCConnection(EC2Connection):
             params['VpcPeeringConnectionId'] = vpc_peering_connection_id
         if dry_run:
             params['DryRun'] = 'true'
+
         return self.get_status('CreateRoute', params)
 
     def replace_route(self, route_table_id, destination_cidr_block,
